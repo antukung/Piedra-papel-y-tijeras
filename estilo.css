@@ -1,0 +1,13 @@
+body {
+    display: grid;
+    place-content: center;
+}
+
+img {
+    width: 10em;
+}
+
+#contenedor-flex {
+    place-content: flex-end;
+    display: flex;
+}
