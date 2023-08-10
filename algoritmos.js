@@ -7,6 +7,13 @@ const IMG1 ="roca.jpg";
 const IMG2="tijeras.jpg";
 const IMG3="papel.jpg";
 
+let conter1=0
+let conter2=0
+
+let ganoUnaHumano=false;
+let ganoUnaMaquina=false;
+let empate=false;
+
 const vectorTodo= [0,IMG1,IMG2,IMG3];
 
 /**
@@ -16,6 +23,7 @@ function jugar() {
          const usuarioValue=crearImagen1();
          const rand2=crearImagen2();
          generarLista(usuarioValue, rand2);
+         ganadorPerdedor(ganoUnaHumano,ganoUnaMaquina)
 };
 /**
  * Crea la primer imagen del jugador
@@ -47,15 +55,34 @@ function crearImagen2() {
  * @param {*} rand2 usa el parametro de la maquina
  */
 function generarLista(usuarioValue, rand2) {
-    if ((usuarioValue===1 && rand2===2)|| (usuarioValue===2 && rand2===3)|| (usuarioValue===3 && rand2===1)) {
-      divLista.innerHTML+=`<p>GANASTE VOS HUMANO</p>`  
+    if ((usuarioValue===1 && rand2===2)|| (usuarioValue===2 && rand2===3)|| (usuarioValue===3 && rand2===1)) {   
+         ganoUnaHumano= true;
+
     }
     
     else if (usuarioValue===rand2){
-        divLista.innerHTML+=`<p>ES UN EMPATE</p>`
+         empate= true;
     }
 
     else {
-        divLista.innerHTML+=`<p>PERDISTE CON LA MAQUINA SOS UN GATITO DE MAMA</p>`
+         ganoUnaMaquina= true;     
     }
+}
+
+function ganadorPerdedor(ganoUnaHumano,ganoUnaMaquina) {
+    if (ganoUnaHumano) {
+        conter1+=1;
+        if (conter1===2) {
+            divLista.innerHTML= `<p>GANASTE VOS HUMANO</p>`
+            conter1=0
+        }
+    } else if (ganoUnaMaquina){
+        conter2+=1;
+        if (conter2===2) {
+            divLista.innerHTML= `<p>SOS UN BEBE TE GANO LA MAQUINA</p>`
+            conter2=0
+        }
+    }
+ganoUnaHumano=false;
+ganoUnaMaquina=false;
 }
