@@ -9,14 +9,18 @@ const IMG3="papel.jpg";
 
 const vectorTodo= [0,IMG1,IMG2,IMG3];
 
-
+/**
+ * Inicia el juego 
+ */
 function jugar() {
-         const usuarioValue = parseInt(usuario.value);
-         const numeroAleatorio1=crearImagen1();
+         const usuarioValue=crearImagen1();
          const rand2=crearImagen2();
-         //generarLista(usuarioValue, rand2);
+         generarLista(usuarioValue, rand2);
 };
-
+/**
+ * Crea la primer imagen del jugador
+ * @return devuelve el valor del usuario
+ */
 function crearImagen1() {
     const usuarioValue = parseInt(usuario.value);
     if (usuarioValue >= 1 && usuarioValue <= 3) {
@@ -24,17 +28,25 @@ function crearImagen1() {
       return usuarioValue;
     }
 }
-
+/**
+ * Crea la imagen de la maquina
+ * @returns devuelve el valor de la maquina
+ */
 function crearImagen2() {
     const numeroAletorio2 = (min, max) =>
     Math.floor(Math.random() * (max - min)) + min;
     
     var rand2 = numeroAletorio2(1,4)
     imagen2.innerHTML = `<img src="${vectorTodo[rand2]}">`;
-    
+    return rand2;
 }
 
-/*function generarLista(usuarioValue, rand2) {
+/**
+ * Genera la lista de ganadores, empates y victorias 
+ * @param {*} usuarioValue usa el parametro del usuario
+ * @param {*} rand2 usa el parametro de la maquina
+ */
+function generarLista(usuarioValue, rand2) {
     if ((usuarioValue===1 && rand2===2)|| (usuarioValue===2 && rand2===3)|| (usuarioValue===3 && rand2===1)) {
       divLista.innerHTML+=`<p>GANASTE VOS HUMANO</p>`  
     }
@@ -46,4 +58,4 @@ function crearImagen2() {
     else {
         divLista.innerHTML+=`<p>PERDISTE CON LA MAQUINA SOS UN GATITO DE MAMA</p>`
     }
-}*/
+}
