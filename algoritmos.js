@@ -2,13 +2,15 @@ const imagen=document.querySelector("#imagen-1");
 const imagen2=document.querySelector("#imagen-2");
 const divLista=document.querySelector("#lista-ganadores");
 const usuario=document.querySelector("#usuario");
+const botones=document.querySelector("#boton");
 
 const IMG1 ="roca.jpg";
 const IMG2="tijeras.jpg";
 const IMG3="papel.jpg";
 
-let conter1=0
-let conter2=0
+let conter1=0;
+let conter2=0;
+let conter3=0;
 
 let ganoUnaHumano=false;
 let ganoUnaMaquina=false;
@@ -25,10 +27,19 @@ function jugar() {
          generarLista(usuarioValue, rand2);
          ganadorPerdedor(ganoUnaHumano,ganoUnaMaquina)
 };
+function borrar() {
+     conter1=0;
+     conter2=0;
+     conter3=0;
+     divLista.innerHTML= ``;
+     botones.disabled=false;
+}
+
 /**
  * Crea la primer imagen del jugador
  * @return devuelve el valor del usuario
  */
+
 function crearImagen1() {
     const usuarioValue = parseInt(usuario.value);
     if (usuarioValue >= 1 && usuarioValue <= 3) {
@@ -74,15 +85,23 @@ function ganadorPerdedor(ganoUnaHumano,ganoUnaMaquina) {
         conter1+=1;
         if (conter1===2) {
             divLista.innerHTML= `<p>GANASTE VOS HUMANO</p>`
-            conter1=0
+            botones.disabled=true;
         }
     } else if (ganoUnaMaquina){
         conter2+=1;
         if (conter2===2) {
-            divLista.innerHTML= `<p>SOS UN BEBE TE GANO LA MAQUINA</p>`
-            conter2=0
+            divLista.innerHTML= `<p>SOS UN BEBE TE GANO LA MAQUINA</p>` 
+            botones.disabled=true;
         }
+    else if (empate) {
+        conter3+=1;
+        if (conter3===2 ){
+            divLista.innerHTML= `<p>HAY UN EMPATE</p>` 
+            botones.disabled=true;
+        }
+    }
     }
 ganoUnaHumano=false;
 ganoUnaMaquina=false;
+empate=false;
 }
